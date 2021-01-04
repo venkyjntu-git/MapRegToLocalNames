@@ -21,6 +21,7 @@ using namespace llvm;
 LLVMContext context;
 
 int main(int argc, char *argv[]) {
+
 	if (argc != 2) {
 		std::cout << "Usage is: ./a.out filename.bc";
 		return -1;
@@ -44,13 +45,13 @@ int main(int argc, char *argv[]) {
 			continue;
 		}  
 
-		for (inst_iterator I = inst_begin(pf), E = inst_end(pf); I != E;++I) {
+	  for (inst_iterator I = inst_begin(pf), E = inst_end(pf); I != E;++I) {
              
-             const Instruction *inst = &(*I);
-             if (const DbgDeclareInst* DbgDeclare = dyn_cast<DbgDeclareInst>(inst)) {       
+     const Instruction *inst = &(*I);
+     if (const DbgDeclareInst* DbgDeclare = dyn_cast<DbgDeclareInst>(inst)) {       
      			   // outs()<<DbgDeclare->getVariable()->getName() <<"\n";
     		 } 
-    		 else if (const DbgValueInst* DbgValue = dyn_cast<DbgValueInst>(inst)) {
+     else if (const DbgValueInst* DbgValue = dyn_cast<DbgValueInst>(inst)) {
       			 
       			 outs()<<DbgValue->getVariable()->getName()<<" same value as ";
                  
@@ -77,13 +78,8 @@ int main(int argc, char *argv[]) {
                  }
 
                  else outs()<<"replaced \n";
-
-                
-
-    		 }                        			
-			
-		} //end instruction loop 
-			
+      }                        						
+	  } //end instruction loop 			
 	} //end module loop
 } //end main
 
