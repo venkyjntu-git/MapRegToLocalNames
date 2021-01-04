@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
 	  for (inst_iterator I = inst_begin(pf), E = inst_end(pf); I != E;++I) {
              
      const Instruction *inst = &(*I);
+     
      if (const DbgDeclareInst* DbgDeclare = dyn_cast<DbgDeclareInst>(inst)) {       
      			   // outs()<<DbgDeclare->getVariable()->getName() <<"\n";
     		 } 
@@ -66,7 +67,8 @@ int main(int argc, char *argv[]) {
 
                       	MDNode *md = insV->getMetadata("dbg"); 
                       	if(md){
-                 	  		DILocation* loc = cast<DILocation>(md);      
+                 	  		  
+                          DILocation* loc = cast<DILocation>(md);      
                       		unsigned lineNo = loc->getLine();
                       		StringRef fileName = loc->getFilename();
                       		if(lineNo!=0) //Instruction  in source program 
